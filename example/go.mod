@@ -3,19 +3,20 @@ module test
 go 1.23.0
 
 replace (
-	github.com/cdnnow-pro/metrics-go => ..
-	github.com/cdnnow-pro/metrics-go/exemplar => ../exemplar
+	github.com/cdnnow-pro/go-metrics => ..
+	github.com/cdnnow-pro/go-metrics/exemplar => ../exemplar
 )
 
 require (
-	github.com/cdnnow-pro/metrics-go v0.0.0-00010101000000-000000000000
-	github.com/cdnnow-pro/metrics-go/exemplar v0.0.0-00010101000000-000000000000
-	github.com/cdnnow-pro/tracer-go v0.0.0-20250228092244-f438f0f5b83a
+	github.com/cdnnow-pro/go-metrics v0.0.0-00010101000000-000000000000
+	github.com/cdnnow-pro/go-metrics/exemplar v0.0.0-00010101000000-000000000000
+	github.com/cdnnow-pro/go-tracer v0.0.0-20250624122824-edd5987a7227
 	github.com/prometheus/client_golang v1.21.0
 )
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/cdnnow-pro/tracer-go v0.0.0-20250228092244-f438f0f5b83a // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect

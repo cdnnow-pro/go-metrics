@@ -1,4 +1,4 @@
-module github.com/cdnnow-pro/metrics-go
+module github.com/cdnnow-pro/go-metrics
 
 go 1.23.0
 

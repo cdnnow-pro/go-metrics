@@ -6,7 +6,7 @@ import (
 	"errors"
 	"runtime/debug"
 
-	"github.com/cdnnow-pro/metrics-go"
+	"github.com/cdnnow-pro/go-metrics"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

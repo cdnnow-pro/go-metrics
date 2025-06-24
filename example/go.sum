@@ -1,5 +1,7 @@
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
+github.com/cdnnow-pro/go-tracer v0.0.0-20250624122824-edd5987a7227 h1:ABx4Ttyz7n5klmCAJzLNrS4uFNrUBkvWEa2fCNvqxYA=
+github.com/cdnnow-pro/go-tracer v0.0.0-20250624122824-edd5987a7227/go.mod h1:OTil+EHJlatnxJMqU5y6jFVWlvCpzoUNsMBRzpJGkv8=
 github.com/cdnnow-pro/tracer-go v0.0.0-20250228092244-f438f0f5b83a h1:5QoLrB4YjcIxYfPZiqfMkgN5n882I+PJEVsykP943hY=
 github.com/cdnnow-pro/tracer-go v0.0.0-20250228092244-f438f0f5b83a/go.mod h1:3t6lCYPF4RJCHz6PoZGUf5o6AOkSPDscR0/z+fOMWUY=
 github.com/cenkalti/backoff/v4 v4.3.0 h1:MyRJ/UdXutAwSAT+s3wNd7MfTIcy71VQueUuFK343L8=

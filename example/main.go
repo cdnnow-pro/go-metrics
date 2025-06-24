@@ -6,9 +6,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/cdnnow-pro/metrics-go"
-	"github.com/cdnnow-pro/metrics-go/exemplar"
-	"github.com/cdnnow-pro/tracer-go"
+	"github.com/cdnnow-pro/go-metrics"
+	"github.com/cdnnow-pro/go-metrics/exemplar"
+	"github.com/cdnnow-pro/go-tracer"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
