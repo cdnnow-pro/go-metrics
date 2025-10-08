@@ -41,7 +41,7 @@ func main() {
 	defer stop()
 
 	ctx, _ = tracer.StartSpan(ctx, "main")
-	exemplarLabel := exemplar.ExemplarFromContext(ctx)
+	exemplarLabel := exemplar.FromContext(ctx)
 
 	test1.With(prometheus.Labels{"label1": "A1", "label2": "B1"}).Inc()
 	test1.With(prometheus.Labels{"label1": "A1", "label2": "B2"}).Inc()
