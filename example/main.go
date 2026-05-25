@@ -13,18 +13,27 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-var (
-	test1 = metrics.NewCounterVec("test_total", "Test1 help", []string{
-		"label1",
-		"label2",
-	})
-	test2 = metrics.NewHistogramVec("test_seconds", "Test2 help", metrics.ResponseTimeBuckets, []string{
-		"label3",
-	})
-)
-
 func main() {
-	http.Handle("/metrics", metrics.Handler(func(opts *promhttp.HandlerOpts) {
+	r := prometheus.NewRegistry()
+
+	var (
+		test1 = metrics.NewCounterVecFor(r, prometheus.CounterOpts{
+			Name: "test_total",
+			Help: "Test1 help",
+		}, []string{
+			"label1",
+			"label2",
+		})
+		test2 = metrics.NewHistogramVecFor(r, prometheus.HistogramOpts{
+			Name:    "test_seconds",
+			Help:    "Test2 help",
+			Buckets: prometheus.DefBuckets,
+		}, []string{
+			"label3",
+		})
+	)
+
+	http.Handle("/metrics", metrics.HandlerFor(r, r, func(opts *promhttp.HandlerOpts) {
 		opts.EnableOpenMetrics = true
 	}))
 	go http.ListenAndServe(":8089", http.DefaultServeMux)

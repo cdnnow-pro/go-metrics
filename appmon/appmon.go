@@ -10,39 +10,45 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-var (
-	buildInfo = metrics.NewGaugeVec(
-		"app_build_info",
-		"Application build info",
-		[]string{"version", "vcs", "revision", "go"},
-	)
-	dependencies = metrics.NewGaugeVec(
-		"go_dependencies",
-		"Application Go modules dependencies with versions",
-		[]string{"path", "version"},
-	)
-)
+var ErrBuildInfo = errors.New("failed to read build info for application metrics")
+
+type ApplicationInfo struct {
+	Name     string
+	Version  string
+	VCS      string
+	Revision string
+	Date     string
+}
 
 // Register registers application metrics:
-//   - app_build_info{version, vcs, revision}
+//   - build_info{name, version, vcs, revision, go}
 //   - go_dependencies{path, version}
-func Register(appVersion, vcs, revision string) error {
-	info, ok := debug.ReadBuildInfo()
-	if !ok {
-		return errors.New("failed to read build info for application metrics")
-	}
-
-	buildInfo.With(prometheus.Labels{
-		"version":  appVersion,
-		"vcs":      vcs,
-		"revision": revision,
-		"go":       info.GoVersion,
+func Register(registerer prometheus.Registerer, appInfo ApplicationInfo) error {
+	metrics.NewGaugeFor(registerer, prometheus.GaugeOpts{
+		Name: "build_info",
+		Help: "Application build info",
+		ConstLabels: prometheus.Labels{
+			"name":     appInfo.Name,
+			"version":  appInfo.Version,
+			"vcs":      appInfo.VCS,
+			"revision": appInfo.Revision,
+			"date":     appInfo.Date,
+		},
 	}).Set(1)
 
+	info, ok := debug.ReadBuildInfo()
+	if !ok {
+		return ErrBuildInfo
+	}
+
 	for _, d := range info.Deps {
-		dependencies.With(prometheus.Labels{
-			"path":    d.Path,
-			"version": d.Version,
+		metrics.NewGaugeFor(registerer, prometheus.GaugeOpts{
+			Name: "go_dependencies",
+			Help: "Application Go modules dependencies with versions",
+			ConstLabels: prometheus.Labels{
+				"path":    d.Path,
+				"version": d.Version,
+			},
 		}).Set(1)
 	}
 	return nil
