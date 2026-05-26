@@ -21,7 +21,7 @@ type ApplicationInfo struct {
 }
 
 // Register registers application metrics:
-//   - build_info{name, version, vcs, revision, go}
+//   - build_info{name, version, vcs, revision, date}
 //   - go_dependencies{path, version}
 func Register(registerer prometheus.Registerer, appInfo ApplicationInfo) error {
 	metrics.NewGaugeFor(registerer, prometheus.GaugeOpts{
